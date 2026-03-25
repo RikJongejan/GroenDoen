@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "naam": "Gazon maaien",
+    "beschrijving": "Wekelijks of tweewekelijks gemaaid, incl. randafwerking en afvoer."
+  },
+  {
+    "id": 2,
+    "naam": "Heg knippen",
+    "beschrijving": "Hagen en struiken netjes gesnoeid en in vorm gehouden."
+  },
+  {
+    "id": 3,
+    "naam": "Tegelwerk",
+    "beschrijving": "Onkruid verwijderen, voegen reinigen en terras schoonmaken."
+  },
+  {
+    "id": 4,
+    "naam": "Volledig onderhoud",
+    "beschrijving": "Alles-in-een: een nette tuin het hele jaar door."
+  }
+]   

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "naam": "Coca colief",
+    "beschrijving": "Perfect voor kleine klusjes: gras maaien, onkruid wieden of snoeien.",
+    "prijs": 70,
+    "uren": 2
+  },
+  {
+    "id": 2,
+    "naam": "Sagoenie package",
+    "beschrijving": "Ideaal voor een complete tuinbeurt: maaien, snoeien én opruimen.",
+    "prijs": 130,
+    "uren": 4
+  },
+  {
+    "id": 3,
+    "naam": "miet planten",
+    "beschrijving": "Een volle dag tuinonderhoud voor een grote tuin of intensieve opknapbeurt.",
+    "prijs": 240,
+    "uren": 8
+  }
+]

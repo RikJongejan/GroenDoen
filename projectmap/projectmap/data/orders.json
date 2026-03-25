@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "klant": "qwertyu45678",
+    "email": "Jan@gmail.com",
+    "telefoon": "0628172934",
+    "adres": "sudistuin 4, Rotterdam",
+    "datum": "Donderdag 26 Maart 2026",
+    "details": "Gras: 10m², Tegels: 11m², Heg: 200m",
+    "offerte": 2431,
+    "status": "In afwachting"
+  },
+  {
+    "id": 5,
+    "klant": "user",
+    "email": "user@gmail.com",
+    "telefoon": "0628172934",
+    "adres": "sudistuin 4, Rotterdam",
+    "datum": "Donderdag 26 Maart 2026",
+    "details": "Gras: 11m², Tegels: 22m², Heg: 11m",
+    "offerte": 440,
+    "status": "Geaccepteerd"
+  },
+  {
+    "id": 6,
+    "klant": "2",
+    "email": "2@gmail.com",
+    "telefoon": "2",
+    "adres": "2",
+    "details": "Gras: 2m², Tegels: 2m², Heg: 2m",
+    "offerte": "60.00",
+    "status": "In afwachting"
+  },
+  {
+    "id": 7,
+    "klant": "Ivo",
+    "email": "Ivo@gmail.com",
+    "telefoon": "1234",
+    "adres": "123",
+    "details": "Gras: 2m², Tegels: 2m², Heg: 2m",
+    "offerte": "60.00",
+    "status": "In afwachting"
+  },
+  {
+    "id": 8,
+    "klant": "user",
+    "email": "user@gmail.com",
+    "telefoon": "12",
+    "adres": "",
+    "details": "Gras: 2m², Tegels: 2m², Heg: 22m",
+    "offerte": "260.00",
+    "status": "In afwachting",
+    "datum": "2026-05-22"
+  },
+  {
+    "id": 9,
+    "klant": "Ivo",
+    "email": "Ivo@g.com",
+    "telefoon": "134",
+    "adres": "324",
+    "details": "Gras: 3m², Tegels: 2m², Heg: 2m",
+    "offerte": "70.00",
+    "status": "Geaccepteerd"
+  }
+]

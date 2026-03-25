@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Groen & Gewoon Doen – Tuinservice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+    <span>06-12345678 &nbsp;&middot;&nbsp; info@groengewoon.nl</span>
+    <span>Rotterdam &amp; omgeving &nbsp;&middot;&nbsp; Ma&ndash;Vr 08:00&ndash;18:00</span>
+</div>
+
+<!-- HEADER -->
+<div class="site-header">
+    <a href="index.html" class="logo">Groen &amp; <span>Gewoon Doen</span></a>
+    <div class="hdr-links">
+        <a href="#diensten"></a>
+        <a href="#pakketten"></a>
+        <a href="#offerte"></a>
+        <a href="#agenda"></a>
+    </div>
+    <div class="hdr-actions">
+        <a href="#" id="button" class="btn btn-outline">Inloggen</a>
+        <!-- Verschijnt alleen na inloggen als klant -->
+        <a href="#offerte" id="btn-mijn-orders-header" class="btn btn-outline" style="display:none" onclick="showSection('mijn-orders')">Mijn Orders</a>
+        <a href="#pakketten" class="btn btn-solid">Boek Nu</a>
+    </div>
+</div>
+
+<!-- LOGIN POPUP -->
+<div class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <h2>Inloggen</h2>
+        <form id="loginForm" onsubmit="event.preventDefault(); getInfo();">
+            <input type="text"     id="username" placeholder="Gebruikersnaam">
+            <input type="password" id="password" placeholder="Wachtwoord">
+            <button type="submit" class="button">Inloggen</button>
+        </form>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-inner">
+        <h1>Uw tuin verzorgd,<br><em>gewoon goed werk.</em></h1>
+        <p>Professioneel gazon maaien, heg knippen en tegelonderhoud in Rotterdam en omgeving. Geen gedoe, gewoon doen.</p>
+        <div class="hero-btns">
+            <a href="#pakketten" class="btn-hero">Bekijk pakketten</a>
+            <a href="#offerte"   class="btn-hero-ghost">Gratis offerte</a>
+        </div>
+    </div>
+</div>
+
+<!-- DIENSTEN -->
+<div id="diensten" class="diensten-wrap">
+    <div class="diensten" id="dienstenGrid"></div>
+</div>
+
+<!-- SECTION HEADER -->
+<div id="pakketten" class="wrap">
+    <div class="section-head">
+        <h2>Pakketten &amp; Offerte</h2>
+        <p>Kies een datum, selecteer een pakket of vraag een offerte op maat aan.</p>
+    </div>
+</div>
+
+<!-- BOOKING LAYOUT: forms left, calendar right -->
+<div id="offerte" class="booking-layout wrap">
+
+    <!-- LEFT: tab nav + forms -->
+    <div class="booking-forms-col">
+
+        <nav class="forms-nav">
+            <ul>
+                <button id="tab-standaard" class="tab-active" onclick="showSection('standaard')">Standaard Pakketten</button>
+                <button id="tab-custom"    onclick="showSection('custom')">Custom Offerte</button>
+                <!-- Verborgen tot klant inlogt -->
+                <button id="tab-mijn-orders" style="display:none" onclick="showSection('mijn-orders')">Mijn Orders</button>
+            </ul>
+        </nav>
+
+        <!-- STANDAARD PAKKETTEN -->
+        <section id="standaard" class="admin-section">
+            <table class="pkg-table">
+                <thead>
+                    <tr>
+                        <th>Pakket</th>
+                        <th>Inhoud</th>
+                        <th>Prijs</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="packageTableBody"></tbody>
+            </table>
+
+            <form id="packageForm">
+                <fieldset>
+                    <legend>Snel Bestellen</legend>
+                    <div class="form-row">
+                        <div class="fg">
+                            <label for="packages">Pakket</label>
+                            <select name="packages" id="packages" required>
+                                <option value="">Selecteer pakket...</option>
+                            </select>
+                        </div>
+                        <div class="fg">
+                            <label for="orderName">Naam</label>
+                            <input type="text" id="orderName" placeholder="Uw naam">
+                        </div>
+                        <div class="fg">
+                            <label for="orderEmail">E-mail *</label>
+                            <input type="email" id="orderEmail" placeholder="jan@email.nl" required>
+                        </div>
+                        <div class="fg">
+                            <label for="orderPhone">Telefoon</label>
+                            <input type="tel" id="orderPhone" placeholder="06-12345678">
+                        </div>
+                        <div class="fg">
+                            <label for="orderLocatie">Locatie *</label>
+                            <input type="text" id="orderLocatie" placeholder="Straat 1, Rotterdam" required>
+                        </div>
+                        <div class="fg-btn">
+                            <button type="submit" class="btn btn-solid">Bestellen</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- CUSTOM OFFERTE -->
+        <section id="custom" class="admin-section">
+            <input type="hidden" id="grass"    name="grass">
+            <input type="hidden" id="tiles"    name="tiles">
+            <input type="hidden" id="hedge"    name="hedge">
+            <input type="hidden" id="options1" name="options1">
+
+            <form id="customForm">
+                <div class="custom-grid">
+                    <div class="fg">
+                        <label for="cNaam">Naam *</label>
+                        <input type="text"  id="cNaam"  placeholder="Jan de Vries" required>
+                    </div>
+                    <div class="fg">
+                        <label for="cEmail">E-mail *</label>
+                        <input type="email" id="cEmail" placeholder="jan@email.nl" required>
+                    </div>
+                    <div class="fg">
+                        <label for="cTel">Telefoon</label>
+                        <input type="tel"   id="cTel"   placeholder="06-12345678">
+                    </div>
+                    <div class="fg">
+                        <label for="cAdres">Adres tuin</label>
+                        <input type="text"  id="cAdres" placeholder="Straat 1, Rotterdam" required>
+                    </div>
+                    <div class="fg">
+                        <label for="grassV">M&#178; gras <span class="field-limits">(10 – 1000 m²)</span></label>
+                        <input type="number" id="grassV" placeholder="min. 10" step="0.1" min="10" max="1000">
+                        <div class="range-bar-wrap"><div class="range-bar" id="barGrassV"></div></div>
+                        <span class="range-hint" id="hintGrassV"></span>
+                    </div>
+                    <div class="fg">
+                        <label for="tilesV">M&#178; tegels / terras <span class="field-limits">(10 – 1000 m²)</span></label>
+                        <input type="number" id="tilesV" placeholder="min. 10" step="0.1" min="10" max="1000">
+                        <div class="range-bar-wrap"><div class="range-bar" id="barTilesV"></div></div>
+                        <span class="range-hint" id="hintTilesV"></span>
+                    </div>
+                    <div class="fg">
+                        <label for="hedgeV">Meters heg <span class="field-limits">(10 – 1000 m)</span></label>
+                        <input type="number" id="hedgeV" placeholder="min. 10" step="0.1" min="10" max="1000">
+                        <div class="range-bar-wrap"><div class="range-bar" id="barHedgeV"></div></div>
+                        <span class="range-hint" id="hintHedgeV"></span>
+                    </div>
+                    <div class="fg">
+                        <label for="options1V">Extra wensen</label>
+                        <input type="text" id="options1V" placeholder="Bijv. bladblazeren...">
+                    </div>
+                </div>
+
+                <div class="price-est">
+                    <h4>Geschatte prijs <span class="est-note">(indicatie, excl. BTW)</span></h4>
+                    <div class="est-line">
+                        <span>Gras (<span id="eGM">0</span> m&#178;, &euro; <span id="eGRate">&#8211;</span>/m&#178;)</span>
+                        <span>&euro; <span id="eGP">0,00</span></span>
+                    </div>
+                    <div class="est-line">
+                        <span>Tegels (<span id="eTM">0</span> m&#178;, &euro; <span id="eTRate">&#8211;</span>/m&#178;)</span>
+                        <span>&euro; <span id="eTP">0,00</span></span>
+                    </div>
+                    <div class="est-line">
+                        <span>Heg (<span id="eHM">0</span> m, &euro; <span id="eHRate">&#8211;</span>/m)</span>
+                        <span>&euro; <span id="eHP">0,00</span></span>
+                    </div>
+                    <div class="est-total">
+                        <span>Totaal</span>
+                        <span>&euro; <span id="eTot">0,00</span></span>
+                    </div>
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" class="btn btn-solid btn-lg">Offerte aanvragen</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- MIJN ORDERS (klant) — verborgen tot ingelogd -->
+        <section id="mijn-orders" class="admin-section">
+            <div style="margin-bottom:16px;">
+                <h3 id="mijnOrdersTitel" style="font-size:18px;color:var(--green-dark);margin-bottom:4px;">Mijn Orders</h3>
+                <p style="font-size:13px;color:var(--muted);">Bekijk uw offertes en geef akkoord of afwijzing.</p>
+            </div>
+            <div id="mijnOrdersLijst"></div>
+        </section>
+
+    </div><!-- /booking-forms-col -->
+
+    <!-- RIGHT: calendar -->
+    <div id="agenda" class="booking-calendar-col">
+        <div class="cal-head-inline">
+            <h3>Kies een datum <span class="required-star">*</span></h3>
+            <p>Selecteer een beschikbare dag om verder te gaan.</p>
+        </div>
+
+        <div class="calendar">
+            <div class="month">
+                <ul>
+                    <li class="prev" onclick="changeMonth(-1)">&#10094;</li>
+                    <li class="next" onclick="changeMonth(1)">&#10095;</li>
+                    <li id="monthLabel"></li>
+                </ul>
+            </div>
+            <ul class="weekdays">
+                <li>Ma</li><li>Di</li><li>Wo</li><li>Do</li><li>Vr</li><li>Za</li><li>Zo</li>
+            </ul>
+            <ul class="days" id="calendarDays"></ul>
+        </div>
+
+        <div class="chosen-date-display" id="chosenDateDisplay">
+            Geen datum geselecteerd
+        </div>
+
+        <div class="calendar-legend">
+            <div class="legend-item"><span class="dot dot-available"></span> Beschikbaar</div>
+            <div class="legend-item"><span class="dot dot-selected"></span> Geselecteerd</div>
+            <div class="legend-item"><span class="dot dot-busy"></span> Volgeboekt</div>
+        </div>
+    </div><!-- /booking-calendar-col -->
+
+</div><!-- /booking-layout -->
+
+<!-- KLANT ORDER MODAL -->
+<div id="klantOrderModal" class="order-modal-overlay" style="display:none">
+    <div class="order-modal">
+        <div class="order-modal-head">
+            <div>
+                <h3 id="klantModalTitel">Order #</h3>
+                <span id="klantModalBadge" class="badge"></span>
+            </div>
+            <button class="order-modal-close" onclick="sluitKlantModal()">&times;</button>
+        </div>
+        <div class="order-modal-body">
+            <div class="order-modal-section">
+                <h4>Opdracht</h4>
+                <div class="modal-row"><span class="modal-label">Datum</span><span class="modal-value" id="klantModalDatum">–</span></div>
+                <div class="modal-row"><span class="modal-label">Details</span><span class="modal-value" id="klantModalDetails">–</span></div>
+                <div class="modal-row"><span class="modal-label">Adres</span><span class="modal-value" id="klantModalAdres">–</span></div>
+                <div class="modal-row"><span class="modal-label">Offerte</span><span class="modal-value" id="klantModalOfferte">–</span></div>
+            </div>
+            <div class="order-modal-section">
+                <h4>Datum aanpassen</h4>
+                <div class="modal-row">
+                    <span class="modal-label">Nieuwe datum</span>
+                    <input type="date" id="klantDatumInput" class="klant-datum-input">
+                </div>
+                <div style="margin-top:10px;">
+                    <button class="btn btn-outline btn-sm" onclick="klantSlaatDatumOp()">Datum opslaan</button>
+                </div>
+            </div>
+        </div>
+        <div class="order-modal-foot" id="klantModalActies">
+            <button class="btn btn-solid" onclick="klantGeeftAkkoord()">✅ Akkoord</button>
+            <button class="btn btn-danger" onclick="klantGeeftNietAkkoord()">❌ Niet akkoord</button>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-band">
+    <div>
+        <h3>Vragen? Bel of mail gerust.</h3>
+        <p>Reactie binnen &eacute;&eacute;n werkdag &nbsp;&middot;&nbsp; 06-12345678 &nbsp;&middot;&nbsp; info@groengewoon.nl</p>
+    </div>
+    <div class="contact-btns">
+        <a href="tel:0612345678"             class="btn btn-white">Bellen</a>
+        <a href="mailto:info@groengewoon.nl" class="btn btn-white-ghost">E-mail sturen</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Groen &amp; Gewoon Doen &nbsp;&middot;&nbsp; Rotterdam &nbsp;&middot;&nbsp; KVK 12345678</p>
+</footer>
+
+<script src="js/main.js?v=4"></script>
+    <div id="toast-container"></div>
+</body>
+</html>

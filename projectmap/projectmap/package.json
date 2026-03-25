@@ -1,0 +1,24 @@
+{
+  "name": "groen_gewoon_doen",
+  "version": "1.0.0",
+  "description": "Groen website",
+  "homepage": "https://github.com/1vo-x33/Groen_Gewoon_Doen#readme",
+  "bugs": {
+    "url": "https://github.com/1vo-x33/Groen_Gewoon_Doen/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1vo-x33/Groen_Gewoon_Doen.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin – Groen & Gewoon Doen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="admin-body">
+
+<!-- HEADER -->
+<header>
+    <div class="hdr-brand">
+        Groen &amp; Gewoon Doen
+        <span>Admin Panel</span>
+    </div>
+    <button type="button" onclick="window.location.href='index.html'">Uitloggen</button>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <nav>
+        <ul>
+            <div class="nav-label">Beheer</div>
+            <button id="nav-orders"   onclick="showSection('orders')">Orders</button>
+            <button id="nav-paketten" onclick="showSection('paketten')">Paketten</button>
+            <button id="nav-tarieven" onclick="showSection('tarieven')">Tarieven</button>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+
+        <!-- ORDERS -->
+        <section id="orders" class="admin-section">
+            <div class="page-title-row">
+                <div class="page-title">
+                    <h2>Orders</h2>
+                    <p>Overzicht van alle opdrachten</p>
+                </div>
+                <button class="btn btn-solid" onclick="openNewOrderForm()">+ Nieuwe order</button>
+            </div>
+
+            <!--
+                Stats filled by loadOrders() from data/orders.json
+            -->
+            <div class="stats-row" id="orderStats">
+                <!-- JS renders stat cards here -->
+            </div>
+
+            <div class="table-card">
+                <div class="table-card-head">
+                    <h3>Alle orders</h3>
+                    <input type="search" id="orderSearch" placeholder="Zoek op naam of ID...">
+                </div>
+                <!--
+                    Table body filled by loadOrders() from data/orders.json
+                -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Klant</th>
+                            <th>Details</th>
+                            <th>Offerte</th>
+                            <th>Status</th>
+                            <th>Acties</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <!-- JS renders rows here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PAKETTEN -->
+        <section id="paketten" class="admin-section">
+            <div class="page-title">
+                <h2>Pakketten</h2>
+                <p>Beheer de beschikbare dienstpakketten</p>
+            </div>
+
+            <div class="table-card">
+                <div class="table-card-head">
+                    <h3>Actieve pakketten</h3>
+                </div>
+                <!--
+                    Table body filled by loadPackages() from data/packages.json
+                -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Beschrijving</th>
+                            <th>Prijs</th>
+                            <th>Bewerk</th>
+                            <th>Verwijder</th>
+                            <th>Vragen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="packageTableBody">
+                        <!-- JS renders rows here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-card">
+                <h3>Nieuw pakket toevoegen</h3>
+                <form id="newPackageForm" onsubmit="event.preventDefault(); handleNewPackage();">
+                    <fieldset>
+                        <legend>Nieuw Pakket</legend>
+                        <div class="form-p">
+                            <label for="naam">Naam:</label>
+                            <input type="text"   id="naam"         name="naam"         placeholder="Pakketnaam" required>
+                        </div>
+                        <div class="form-p">
+                            <label for="beschrijving">Beschrijving:</label>
+                            <input type="text"   id="beschrijving" name="beschrijving" placeholder="Korte omschrijving" required>
+                        </div>
+                        <div class="form-p">
+                            <label for="prijs">Prijs (&euro;):</label>
+                            <input type="number" id="prijs"        name="prijs"        placeholder="0.00" step="0.01" required>
+                        </div>
+                        <button type="submit" class="btn btn-solid">Toevoegen</button>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+
+        <!-- TARIEVEN -->
+        <section id="tarieven" class="admin-section">
+            <div class="page-title">
+                <h2>Tarieven</h2>
+                <p>Basistarieven voor de offertecalculator op de website</p>
+            </div>
+
+            <div class="form-card">
+                <h3>Tarieven per eenheid</h3>
+                <!--
+                    Input values filled by loadTarieven() from data/tarieven.json.
+                    On save, writeTarieven() writes back to the JSON.
+                -->
+                <form id="tarievenForm" onsubmit="event.preventDefault(); saveTarieven();">
+                    <div class="tarief-grid">
+                        <div class="tarief-item">
+                            <label for="tGras">Prijs per m&sup2; gras</label>
+                            <input type="number" id="tGras"      step="0.01" placeholder="0.00" required>
+                            <small>&euro; per vierkante meter</small>
+                        </div>
+                        <div class="tarief-item">
+                            <label for="tTegels">Prijs per m&sup2; tegels</label>
+                            <input type="number" id="tTegels"    step="0.01" placeholder="0.00" required>
+                            <small>&euro; per vierkante meter</small>
+                        </div>
+                        <div class="tarief-item">
+                            <label for="tHeg">Prijs per m heg</label>
+                            <input type="number" id="tHeg"       step="0.01" placeholder="0.00" required>
+                            <small>&euro; per strekkende meter</small>
+                        </div>
+                        <div class="tarief-item">
+                            <label for="tUurtarief">Uurtarief maatwerk</label>
+                            <input type="number" id="tUurtarief" step="0.01" placeholder="0.00" required>
+                            <small>&euro; per uur</small>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-solid">Tarieven opslaan</button>
+                </form>
+            </div>
+        </section>
+
+    </div><!-- /admin-main -->
+</div><!-- /layout -->
+
+<script src="js/main.js"></script>
+</body>
+</html>
